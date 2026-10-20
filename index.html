@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teodora Bulatović – Frontend Developer</title>
+<meta name="description" content="Frontend developer from Podgorica with 6+ years building digital banking applications in Angular, React and Camunda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #E9EEF2;
+    --surface: #F7F9FB;
+    --ink: #14213D;
+    --muted: #55617A;
+    --line: #C9D2DC;
+    --accent: #2F4BC7;
+    --accent-ink: #FFFFFF;
+    --code-bg: #14213D;
+    --code-fg: #DCE3F0;
+    --code-key: #8FB3FF;
+    --code-str: #F2C46D;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0F1729;
+      --surface: #17213A;
+      --ink: #E6EBF3;
+      --muted: #9AA6BD;
+      --line: #2A3653;
+      --accent: #7C95FF;
+      --accent-ink: #0F1729;
+      --code-bg: #0A1020;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0F1729; --surface: #17213A; --ink: #E6EBF3; --muted: #9AA6BD;
+    --line: #2A3653; --accent: #7C95FF; --accent-ink: #0F1729; --code-bg: #0A1020;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1.0625rem/1.6 "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  img { max-width: 100%; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 5rem 0 4rem;
+  }
+  .hero h1 {
+    font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.75rem, 7vw, 4.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.25rem;
+  }
+  .hero .role { font-size: 1.25rem; color: var(--muted); margin: 0 0 2rem; max-width: 32rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.3rem;
+    border-radius: 999px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 2px solid var(--accent);
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-ghost { color: var(--accent); }
+
+  /* The memorable element: a "CV as code" card */
+  .code {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    border-radius: 14px;
+    padding: 1.5rem 1.6rem;
+    font: 400 0.92rem/1.75 "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    overflow-x: auto;
+    transform: rotate(1.5deg);
+    box-shadow: 0 30px 60px -30px rgba(20, 33, 61, 0.55);
+  }
+  .code .k { color: var(--code-key); }
+  .code .s { color: var(--code-str); }
+  .code .c { color: #6F7D99; }
+  .cursor { display: inline-block; width: 0.55em; height: 1.1em; background: var(--code-str); vertical-align: text-bottom; animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+
+  /* Sections */
+  section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.9rem;
+    letter-spacing: -0.015em;
+    margin: 0 0 1.75rem;
+  }
+  .about p { max-width: 38rem; margin: 0 0 1rem; }
+
+  /* Projects */
+  .featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .shot {
+    aspect-ratio: 16 / 10;
+    border-radius: 10px;
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 2.2rem,
+      var(--paper);
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 1rem;
+  }
+  .flow { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem; overflow-x: auto; }
+  .flow svg { display: block; width: 100%; min-width: 300px; height: auto; }
+  .flow text { font: 500 12px "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink); }
+  .flow .box { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+  .flow .ev { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+  .flow .ev-end { fill: var(--surface); stroke: var(--ink); stroke-width: 3.5; }
+  .flow .gw { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+  .flow .arr { stroke: var(--muted); stroke-width: 1.5; fill: none; marker-end: url(#a); }
+  .flow .cap { fill: var(--muted); font-size: 11px; }
+  .domains { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 1.25rem 0 0; }
+  .domains li { background: var(--accent); color: var(--accent-ink); padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.88rem; font-weight: 500; }
+  .phone { color: var(--muted); margin: 0 0 1.5rem; }
+  h3 {
+    font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    margin: 0 0 0.5rem;
+  }
+  .featured h3 { font-size: 1.7rem; }
+  .featured .tag { color: var(--accent); font-weight: 500; margin: 0 0 0.6rem; font-size: 0.95rem; }
+  .project p { margin: 0 0 0.9rem; color: var(--muted); }
+  .stack { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0 0 1rem; }
+  .stack li { font-size: 0.85rem; padding: 0.2rem 0.65rem; border-radius: 999px; border: 1px solid var(--line); }
+  .links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-weight: 500; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 2rem; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .skills h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
+  .skills ul { margin: 0; padding: 0; list-style: none; color: var(--muted); }
+  .skills li { padding: 0.15rem 0; }
+
+  /* Experience */
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li { display: grid; grid-template-columns: 9rem 1fr; gap: 1.5rem; padding: 1rem 0; }
+  .timeline .when { color: var(--muted); font-size: 0.95rem; }
+  .timeline h3 { font-size: 1.1rem; margin: 0; }
+  .timeline p { margin: 0.25rem 0 0; color: var(--muted); }
+
+  /* Contact */
+  .contact .big {
+    font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 5vw, 2.75rem);
+    letter-spacing: -0.02em;
+    word-break: break-word;
+  }
+  footer { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding: 3rem 0; gap: 2.5rem; }
+    .code { transform: none; }
+    .featured, .grid { grid-template-columns: 1fr; }
+    .featured { padding: 1.25rem; }
+    .skills { grid-template-columns: 1fr 1fr; }
+    .timeline li { grid-template-columns: 1fr; gap: 0.2rem; }
+  }
+  .topbar { display: flex; justify-content: flex-end; padding-top: 1.25rem; }
+  .lang { display: inline-flex; border: 1.5px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; }
+  .lang button {
+    font: 500 0.85rem/1 "IBM Plex Sans", system-ui, sans-serif;
+    color: var(--muted); background: none; border: 0; border-radius: 999px;
+    padding: 0.45rem 0.8rem; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  .hero { padding-top: 3.5rem; }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <nav class="topbar" aria-label="Language">
+    <div class="lang" role="group">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="sr" aria-pressed="false">SR</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>Teodora Bulatović</h1>
+      <p class="role" data-i18n="hero.role">Frontend developer from Podgorica. For the past six years I’ve been building the screens and processes behind digital banking for major European banks.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#work" data-i18n="btn.work">See my work</a>
+        <a class="btn btn-ghost" href="cv.pdf" download data-i18n="btn.cv">Download CV (PDF)</a>
+      </div>
+    </div>
+    <pre class="code" data-i18n="hero.code"><span class="k">const</span> teodora = {
+  role: <span class="s">"Frontend Developer"</span>,
+  based: <span class="s">"Podgorica, Montenegro"</span>,
+  experience: <span class="s">"6+ years"</span>,
+  frontend: [<span class="s">"Angular"</span>, <span class="s">"React"</span>],
+  workflows: <span class="s">"Camunda BPMN"</span>,
+  backend: [<span class="s">".NET"</span>, <span class="s">"Node.js"</span>],
+  domain: <span class="s">"digital banking"</span>
+};<span class="c">  // open to new opportunities</span>
+<span class="cursor" aria-hidden="true"></span></pre>
+  </header>
+
+  <section class="about" id="about">
+    <h2 data-i18n="about.h">About me</h2>
+    <p data-i18n="about.p1">I’m a software developer with 6+ years of experience delivering enterprise web applications, mostly in digital banking. My focus is the frontend layer in Angular and implementing business processes in Camunda BPMN, and I also work with React, .NET and Node.js.</p>
+    <p data-i18n="about.p2">I’ve delivered complete banking journeys – account opening, deposits, loan origination, bank guarantees and leasing – for both bank customers and the agents who serve them. I care about clean code, good teamwork and learning something new on every project.</p>
+  </section>
+
+  <section id="work">
+    <h2 data-i18n="work.h">Work</h2>
+
+    <article class="featured project">
+      <figure class="flow">
+        <svg viewBox="0 0 520 200" role="img" aria-hidden="true">
+          <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor" style="color:var(--muted)"/></marker></defs>
+          <circle class="ev" cx="24" cy="80" r="14"/>
+          <path class="arr" d="M38 80H66"/>
+          <rect class="box" x="68" y="56" width="96" height="48" rx="8"/><text x="116" y="84" text-anchor="middle" data-i18n="flow.app">Application</text>
+          <path class="arr" d="M164 80H192"/>
+          <rect class="box" x="194" y="56" width="96" height="48" rx="8"/><text x="242" y="84" text-anchor="middle" data-i18n="flow.review">Agent review</text>
+          <path class="arr" d="M290 80H316"/>
+          <path class="gw" d="M340 56L364 80L340 104L316 80z"/><text x="340" y="85" text-anchor="middle">×</text>
+          <path class="arr" d="M364 80H392"/><text class="cap" x="378" y="72" text-anchor="middle" data-i18n="flow.yes">yes</text>
+          <rect class="box" x="394" y="56" width="90" height="48" rx="8"/><text x="439" y="84" text-anchor="middle" data-i18n="flow.issue">Issuance</text>
+          <path class="arr" d="M484 80H492V124"/><circle class="ev-end" cx="492" cy="140" r="13"/>
+          <path class="arr" d="M340 104V150H258"/><text class="cap" x="350" y="134" data-i18n="flow.no">no</text>
+          <rect class="box" x="160" y="128" width="96" height="44" rx="8"/><text x="208" y="154" text-anchor="middle" data-i18n="flow.rework">Rework request</text>
+          <path class="arr" d="M208 128V106"/>
+        </svg>
+      </figure>
+      <div>
+        <p class="tag" data-i18n="feat.tag">Core project · since 2021</p>
+        <h3 data-i18n="feat.h">Digital banking processes for European banks</h3>
+        <p data-i18n="feat.p1">Customer and agent-facing banking applications, where I build the Angular frontend and the Camunda BPMN workflows that orchestrate each multi-step operation – task assignment, approvals and system integrations.</p>
+        <p data-i18n="feat.p2">Right now I’m implementing the bank guarantees process for Raiffeisen Bank Croatia, from application through approval to issuance, and the leasing process for Raiffeisen Bank Kosovo, covering application, evaluation and the contract workflow.</p>
+        <ul class="stack"><li>Angular</li><li>TypeScript</li><li>Camunda BPMN</li><li>REST APIs</li></ul>
+        <ul class="domains">
+          <li data-i18n="dom.1">Account opening</li><li data-i18n="dom.2">Deposits</li><li data-i18n="dom.3">Loan origination</li><li data-i18n="dom.4">Bank guarantees</li><li data-i18n="dom.5">Leasing</li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="grid">
+      <article class="project">
+        <h3 data-i18n="p1.h">Monitoring system</h3>
+        <p data-i18n="p1.p">Responsive frontend for a monitoring platform, built as the React developer on the team.</p>
+        <ul class="stack"><li>React</li><li>Tailwind CSS</li><li>Shadcn UI</li></ul>
+      </article>
+      <article class="project">
+        <h3>Travelaizer</h3>
+        <p data-i18n="p2.p">Montenegro’s marketplace for activities and one-day trips, on the web and in mobile apps. Built with an Astro and React frontend backed by .NET services.</p>
+        <ul class="stack"><li>Astro</li><li>React</li><li>.NET</li></ul>
+        <div class="links">
+          <a href="https://travelaizer.com/" target="_blank" rel="noopener" data-i18n="link.web">Website</a>
+          <a href="https://apps.apple.com/app/6470895914" target="_blank" rel="noopener">App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=me.digitalcontrol.travelaizer" target="_blank" rel="noopener">Google Play</a>
+        </div>
+      </article>
+      <article class="project">
+        <h3 data-i18n="p3.h">Viber bot application</h3>
+        <p data-i18n="p3.p">Designed and built both sides of the product: the Angular frontend and the .NET and Node.js backend.</p>
+        <ul class="stack"><li>Angular</li><li>.NET</li><li>Node.js</li></ul>
+      </article>
+      <article class="project">
+        <h3 data-i18n="p4.h">Public administration platform</h3>
+        <p data-i18n="p4.p">Contributed robust modules to a platform for public administration services.</p>
+        <ul class="stack"><li>.NET</li><li>Blazor</li><li>C#</li></ul>
+      </article>
+      <article class="project">
+        <h3 data-i18n="p5.h">Location-based mobile game</h3>
+        <p data-i18n="p5.p">A mobile game in the spirit of Pokémon Go, where I designed location-driven functionality and interactive gameplay features.</p>
+        <ul class="stack"><li data-i18n="p5.t1">Mobile</li><li data-i18n="p5.t2">Geolocation</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 data-i18n="sk.h">Skills</h2>
+    <div class="skills">
+      <div><h3>Frontend</h3><ul><li>Angular</li><li>React</li><li>Blazor</li><li>Astro</li><li>TypeScript, JavaScript</li><li>HTML, CSS</li></ul></div>
+      <div><h3>Backend</h3><ul><li>.NET, C#</li><li>Node.js</li><li>REST APIs</li></ul></div>
+      <div><h3 data-i18n="sk.wf">Workflows</h3><ul><li>Camunda</li><li data-i18n="sk.wf1">BPMN modeling</li><li data-i18n="sk.wf2">BPMN implementation</li></ul></div>
+      <div><h3 data-i18n="sk.ui">UI and tools</h3><ul><li>Tailwind CSS, SCSS</li><li>Bootstrap, Shadcn UI</li><li>Git, Jira, Figma</li><li>Agile, Scrum</li></ul></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 data-i18n="ex.h">Experience and education</h2>
+    <ol class="timeline">
+      <li><span class="when" data-i18n="ex.1w">Dec 2021 – now</span><div><h3 data-i18n="ex.1h">Software Developer · Current Company, Podgorica</h3><p data-i18n="ex.1p">Digital banking applications in Angular and Camunda, plus parallel projects in React, .NET and Blazor.</p></div></li>
+      <li><span class="when" data-i18n="ex.2w">Sep 2019 – Oct 2021</span><div><h3 data-i18n="ex.2h">Software Developer · Gaming Industry Company</h3><p data-i18n="ex.2p">Location-based mobile game and interactive gameplay features.</p></div></li>
+      <li><span class="when" data-i18n="ex.3w">Education</span><div><h3 data-i18n="ex.3h">BSc in Computer Science</h3><p data-i18n="ex.3p">Faculty of Natural Sciences and Mathematics, University of Montenegro</p></div></li>
+      <li><span class="when" data-i18n="ex.4w">Languages</span><div><h3 data-i18n="ex.4h">Serbian (native), English (intermediate)</h3></div></li>
+    </ol>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 data-i18n="ct.h">Contact</h2>
+    <p data-i18n="ct.p">I’m open to new roles and collaborations. Email is the fastest way to reach me.</p>
+    <p class="big"><a href="mailto:teodorabulatovic@outlook.com">teodorabulatovic@outlook.com</a></p>
+    <p class="phone"><a href="tel:+38269579868">+382 69 579 868</a> · <span data-i18n="ct.city">Podgorica, Montenegro</span></p>
+    <!-- Add your profile links:
+    <div class="links"><a href="https://github.com/YOUR-NAME">GitHub</a><a href="https://www.linkedin.com/in/YOUR-NAME">LinkedIn</a></div> -->
+  </section>
+
+  <footer>© 2026 Teodora Bulatović</footer>
+</main>
+
+<script>
+(function () {
+  // Serbian translations. English is the text already in the page.
+  var sr = {
+    "meta.title": "Teodora Bulatović – Frontend developerka",
+    "meta.desc": "Frontend developerka iz Podgorice sa više od 6 godina iskustva u izradi aplikacija za digitalno bankarstvo u Angularu, Reactu i Camundi.",
+    "hero.role": "Frontend developerka iz Podgorice. Posljednjih šest godina pravim ekrane i procese koji stoje iza digitalnog bankarstva za velike evropske banke.",
+    "btn.work": "Pogledaj moj rad",
+    "btn.cv": "Preuzmi CV (PDF)",
+    "hero.code": '<span class="k">const</span> teodora = {\n  role: <span class="s">"Frontend developerka"</span>,\n  based: <span class="s">"Podgorica, Crna Gora"</span>,\n  experience: <span class="s">"6+ godina"</span>,\n  frontend: [<span class="s">"Angular"</span>, <span class="s">"React"</span>],\n  workflows: <span class="s">"Camunda BPMN"</span>,\n  backend: [<span class="s">".NET"</span>, <span class="s">"Node.js"</span>],\n  domain: <span class="s">"digitalno bankarstvo"</span>\n};<span class="c">  // otvorena za nove prilike</span>\n<span class="cursor" aria-hidden="true"></span>',
+    "about.h": "O meni",
+    "about.p1": "Softverska developerka sam sa više od 6 godina iskustva u izradi enterprise web aplikacija, uglavnom u digitalnom bankarstvu. Fokusirana sam na frontend u Angularu i implementaciju poslovnih procesa u Camunda BPMN-u, a radim i sa Reactom, .NET-om i Node.js-om.",
+    "about.p2": "Isporučila sam kompletne bankarske procese – otvaranje računa, depozite, odobravanje kredita, bankarske garancije i lizing – i za klijente banke i za agente koji s njima rade. Stalo mi je do čistog koda, dobrog timskog rada i učenja nečeg novog na svakom projektu.",
+    "work.h": "Projekti",
+    "flow.app": "Zahtjev",
+    "flow.review": "Pregled agenta",
+    "flow.yes": "da",
+    "flow.issue": "Izdavanje",
+    "flow.no": "ne",
+    "flow.rework": "Dorada zahtjeva",
+    "feat.tag": "Glavni projekat · od 2021.",
+    "feat.h": "Digitalni bankarski procesi za evropske banke",
+    "feat.p1": "Bankarske aplikacije za klijente i agente, u kojima radim Angular frontend i Camunda BPMN procese koji vode svaku operaciju kroz više koraka – dodjelu zadataka, odobrenja i integracije sa drugim sistemima.",
+    "feat.p2": "Trenutno implementiram proces bankarskih garancija za Raiffeisen Bank Hrvatska, od zahtjeva preko odobrenja do izdavanja, i proces lizinga za Raiffeisen Bank Kosovo, koji obuhvata zahtjev, procjenu i ugovor.",
+    "dom.1": "Otvaranje računa", "dom.2": "Depoziti", "dom.3": "Odobravanje kredita", "dom.4": "Bankarske garancije", "dom.5": "Lizing",
+    "p1.h": "Sistem za monitoring",
+    "p1.p": "Responzivni frontend za platformu za monitoring, na kojoj sam radila kao React developerka u timu.",
+    "p2.p": "Platforma za aktivnosti i jednodnevne izlete u Crnoj Gori, na webu i u mobilnim aplikacijama. Napravljena sa Astro i React frontendom i .NET servisima na backendu.",
+    "link.web": "Web stranica",
+        "p3.h": "Viber bot aplikacija",
+    "p3.p": "Dizajnirala sam i napravila oba dijela proizvoda: Angular frontend i .NET i Node.js backend.",
+    "p4.h": "Platforma za javnu upravu",
+    "p4.p": "Radila sam na pouzdanim modulima platforme za usluge javne uprave.",
+    "p5.h": "Mobilna igra zasnovana na lokaciji",
+    "p5.p": "Mobilna igra u stilu Pokémon Go-a, za koju sam dizajnirala funkcionalnosti zasnovane na lokaciji i interaktivne elemente igre.",
+    "p5.t1": "Mobilno", "p5.t2": "Geolokacija",
+    "sk.h": "Vještine",
+    "sk.wf": "Procesi", "sk.wf1": "BPMN modelovanje", "sk.wf2": "BPMN implementacija",
+    "sk.ui": "UI i alati",
+    "ex.h": "Iskustvo i obrazovanje",
+    "ex.1w": "Dec 2021 – danas",
+    "ex.1h": "Softverska developerka · Trenutna kompanija, Podgorica",
+    "ex.1p": "Aplikacije za digitalno bankarstvo u Angularu i Camundi, uz paralelne projekte u Reactu, .NET-u i Blazoru.",
+    "ex.2w": "Sep 2019 – Okt 2021",
+    "ex.2h": "Softverska developerka · Kompanija iz gejming industrije",
+    "ex.2p": "Mobilna igra zasnovana na lokaciji i interaktivni elementi igre.",
+    "ex.3w": "Obrazovanje",
+    "ex.3h": "Osnovne studije računarskih nauka",
+    "ex.3p": "Prirodno-matematički fakultet, Univerzitet Crne Gore",
+    "ex.4w": "Jezici",
+    "ex.4h": "Srpski (maternji), engleski (srednji nivo)",
+    "ct.h": "Kontakt",
+    "ct.p": "Otvorena sam za nove poslove i saradnje. Najbrže odgovaram na email.",
+    "ct.city": "Podgorica, Crna Gora"
+  };
+
+  var nodes = document.querySelectorAll("[data-i18n]");
+  var desc = document.querySelector('meta[name="description"]');
+  var en = { "meta.title": document.title, "meta.desc": desc ? desc.content : "" };
+  nodes.forEach(function (el) { en[el.dataset.i18n] = el.innerHTML; });
+
+  function setLang(lang) {
+    var dict = lang === "sr" ? sr : en;
+    nodes.forEach(function (el) {
+      var t = dict[el.dataset.i18n];
+      if (t !== undefined) el.innerHTML = t;
+    });
+    document.title = dict["meta.title"];
+    if (desc) desc.content = dict["meta.desc"];
+    document.documentElement.lang = lang === "sr" ? "sr-Latn" : "en";
+    document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.setLang === lang));
+    });
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+  }
+
+  document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.dataset.setLang); });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem("lang"); } catch (e) {}
+  if (saved === "sr") setLang("sr");
+})();
+</script>
+</body>
+</html>
